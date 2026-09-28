@@ -1,0 +1,106 @@
+{
+  "title": "Procedural Core: A Compact Recurrent Initialization for Vision Transformers",
+  "status": "Preprint",
+  "paper_headline_results": {
+    "source": "Paper Figure 2, page 5; mean \u00b1 standard deviation over 3 seeds",
+    "dataset": "ImageNet-1k",
+    "architecture": "ViT-Base",
+    "training_epochs": 300,
+    "target_parameters_approx": 85000000,
+    "core_parameters_approx": 1000000,
+    "metric": "top-1 accuracy (%)",
+    "methods": [
+      {
+        "method": "Default initialization",
+        "mean": 77.6,
+        "sd": 0.2
+      },
+      {
+        "method": "Mimetic initialization",
+        "mean": 79.5,
+        "sd": 0.7
+      },
+      {
+        "method": "Procedural warm-up",
+        "mean": 79.4,
+        "sd": 0.3
+      },
+      {
+        "method": "Procedural Core",
+        "mean": 79.8,
+        "sd": 0.6
+      }
+    ],
+    "reported_gain_pp": 2.2
+  },
+  "language": {
+    "source": "tables/perplexity.py; paper Figure 4",
+    "architecture": "12-block GPT-2-style model, 124M parameters",
+    "training_tokens": 2000000000,
+    "metric": "validation perplexity",
+    "direction": "lower",
+    "n_seeds": 3,
+    "results": [
+      {
+        "dataset": "FineWeb-Edu",
+        "default": 28.8,
+        "default_sd": 0.4,
+        "core": 27.7,
+        "core_sd": 0.4
+      },
+      {
+        "dataset": "CodeParrot",
+        "default": 5.7,
+        "default_sd": 0.03,
+        "core": 5.5,
+        "core_sd": 0.03
+      }
+    ],
+    "caveat": "Language cores are trained with a GPT-2-style architecture; this is not the exact same checkpoint as the vision core."
+  },
+  "depth": {
+    "source": "tables/combined.py and paper Figure 5c",
+    "dataset": "CIFAR-100",
+    "metric": "accuracy (%)",
+    "results": [
+      {
+        "layers": 6,
+        "default": 69.3,
+        "default_sd": 0.3251,
+        "core": 71.3,
+        "core_sd": 0.4703
+      },
+      {
+        "layers": 12,
+        "default": 72.1,
+        "default_sd": 0.6322,
+        "core": 74.6,
+        "core_sd": 0.5281
+      },
+      {
+        "layers": 24,
+        "default": 72.4,
+        "default_sd": 0.1365,
+        "core": 75.2,
+        "core_sd": 0.6401
+      }
+    ]
+  },
+  "recurrence": {
+    "source": "tables/combined.py and paper Figure 5b",
+    "metric": "CIFAR-100 relative gain (%)",
+    "results": [
+      {
+        "method": "No recurrence",
+        "relative_gain": 1.65,
+        "sd": 0.225
+      },
+      {
+        "method": "Procedural Core",
+        "relative_gain": 4.72,
+        "sd": 0.4895
+      }
+    ],
+    "caveat": "Values are relative gains, not percentage point differences."
+  }
+}
