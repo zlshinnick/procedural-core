@@ -8,36 +8,82 @@
   <meta property="og:title" content="Procedural Core — Small core. Better start."><meta property="og:description" content="A compact recurrent initialization for vision transformers. A ~1M-parameter core initializes an 85M-parameter ViT-Base."><meta property="og:type" content="website"><meta property="og:url" content="https://zlshinnick.github.io/procedural-core-page/">
   <meta name="twitter:card" content="summary"><meta name="twitter:title" content="Procedural Core"><meta name="twitter:description" content="Train once. Expand the weights. Give larger transformers a better start.">
   <link rel="canonical" href="https://zlshinnick.github.io/procedural-core-page/">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2308090d'/%3E%3Cpath d='M15 15h15v15H15zm19 0h15v15H34zM15 34h15v15H15z' fill='%23c6ff6b'/%3E%3Cpath d='M34 34h15v15H34z' fill='none' stroke='%23c6ff6b' stroke-width='3'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="fonts.css"><link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="fonts.css"><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="hero.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <header class="header"><a class="wordmark" href="#"><span class="brand-icon" aria-hidden="true">▦</span> Procedural Core</a><nav aria-label="Main navigation"><a href="#method">Method</a><a href="#results">Results</a><a href="#insights">Insights</a><a href="assets/procedural-core-paper.pdf" class="nav-paper">Read paper <span aria-hidden="true">↗</span></a></nav></header>
+  <header class="header"><a class="wordmark" href="#"><img class="brand-icon" src="assets/logo.svg" width="48" height="30" alt=""> Procedural Core</a><nav aria-label="Main navigation"><a href="#method">Method</a><a href="#results">Results</a><a href="#insights">Insights</a><a href="assets/procedural-core-paper.pdf" class="nav-paper">Read paper <span aria-hidden="true">↗</span></a></nav></header>
   <main id="main">
   <section class="hero container" aria-labelledby="hero-title">
     <div class="eyebrow"><span class="tag">RESEARCH PREPRINT</span><span>2026</span></div>
     <h1 id="hero-title">Procedural <span>Core.</span></h1>
     <div class="hero-copy"><h2>A small core.<br>A better starting point.</h2><p>Train a compact recurrent core on abstract data. Expand its weights to give larger transformers useful structure—before they ever see an image.</p></div>
     <div class="hero-actions"><a class="button primary" href="assets/procedural-core-paper.pdf">Read the paper <span aria-hidden="true">↗</span></a><a class="button secondary" href="#method">See how it works <span aria-hidden="true">↓</span></a></div>
-    <div class="hero-visual" role="img" aria-label="Abstract procedural tokens train a compact core with three unique blocks. Its weights are expanded in width and depth to initialize a larger transformer.">
-      <div class="diagram-label"><span>ONE CORE. REUSABLE STRUCTURE.</span><span>01 — 03</span></div>
-      <div class="diagram-grid">
-        <div class="token-stage"><div class="tokens">( <span>[</span> { } <span>]</span> )<br><span>{</span> ( [ ] ) <span>}</span><br>[ <span>{</span> ( ) <span>}</span> ]</div><span class="diagram-caption">01 / ABSTRACT DATA</span></div>
-        <div class="diagram-connector" aria-hidden="true"><span></span>→</div>
-        <div class="core-stage"><div class="core-stack"><div>First block</div><div class="shared">Shared recurrent block <span aria-hidden="true">↻</span></div><div>Last block</div></div><div class="diagram-caption"><strong>~1M</strong> CORE PARAMETERS</div></div>
-        <div class="diagram-connector" aria-hidden="true"><span></span>→</div>
-        <div class="target-stage"><div class="target-stack" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="diagram-caption"><strong>85M</strong> TARGET PARAMETERS</div></div>
+<div class="hx-explorer" id="hero-explorer" aria-label="Explore how Procedural Core works">
+  <div class="hx-topline"><p class="hx-kicker">ONE CORE. ROOM TO GROW.</p><button class="hx-motion" type="button" hidden><span aria-hidden="true">Ⅱ</span> Pause motion</button></div>
+  <div class="hx-tabs" role="tablist" aria-label="Explore the three stages" hidden>
+    <button id="hx-tab-learn" type="button" role="tab" aria-selected="true" aria-controls="hx-panel-learn" data-hx-stage="learn"><span>01</span> Learn <i aria-hidden="true">↗</i></button>
+    <button id="hx-tab-expand" type="button" role="tab" aria-selected="false" aria-controls="hx-panel-expand" tabindex="-1" data-hx-stage="expand"><span>02</span> Expand <i aria-hidden="true">↗</i></button>
+    <button id="hx-tab-train" type="button" role="tab" aria-selected="false" aria-controls="hx-panel-train" tabindex="-1" data-hx-stage="train"><span>03</span> Train <i aria-hidden="true">↗</i></button>
+  </div>
+
+  <div class="hx-panel" id="hx-panel-learn" role="tabpanel" aria-labelledby="hx-tab-learn" tabindex="0">
+    <div class="hx-learn-scene">
+      <div class="hx-source">
+        <span class="hx-overline">PROCEDURAL DATA</span>
+        <div class="hx-tokens" aria-label="Abstract nested tokens"><div>( <b>[</b> { } <b>]</b> )</div><div><b>{</b> ( [ ] ) <b>}</b></div><div>[ <b>{</b> ( ) <b>}</b> ]</div></div>
+        <span class="hx-caption">Structure without images</span>
       </div>
-      <div class="diagram-footer"><span>Learn once</span><span>Expand in width & depth</span><span>Train the target normally</span></div>
+      <div class="hx-flow" aria-hidden="true"><span></span><b>›</b><i>[ ]</i></div>
+      <div class="hx-core">
+        <span class="hx-overline">COMPACT CORE</span>
+        <div class="hx-core-block">First block</div>
+        <div class="hx-recurrent"><div class="hx-core-block hx-middle">Shared middle block <span class="hx-loop" aria-hidden="true">↻</span></div><span class="hx-loop-path" aria-hidden="true"></span></div>
+        <div class="hx-core-block">Last block</div>
+        <span class="hx-caption"><strong>~1M</strong> parameters · 3 unique blocks</span>
+      </div>
+      <div class="hx-learn-copy"><span class="hx-mini-core" aria-hidden="true">↻</span><h3>Learn a little.<br>Reuse a lot.</h3><p>The same middle block runs repeatedly. Its weights learn reusable structure from abstract data.</p><button type="button" class="hx-next" data-hx-next="expand" hidden>Now expand it <span aria-hidden="true">→</span></button></div>
     </div>
+    <div class="hx-panel-foot"><span class="hx-status-dot" aria-hidden="true"></span><p>One compact core learns the starting point for a larger model.</p></div>
+  </div>
+
+  <div class="hx-panel" id="hx-panel-expand" role="tabpanel" aria-labelledby="hx-tab-expand" tabindex="0" hidden>
+    <div class="hx-expand-scene">
+      <div class="hx-width-demo">
+        <div class="hx-control-heading"><div><span class="hx-overline">MAKE IT WIDER</span><h3>Tile the weights.</h3></div><fieldset class="hx-choice"><legend class="hx-sr-only">Illustrative width multiplier</legend><label><input type="radio" name="hx-width" value="1"><span>1×</span></label><label><input type="radio" name="hx-width" value="2" checked><span>2×</span></label><label><input type="radio" name="hx-width" value="4"><span>4×</span></label></fieldset></div>
+        <div class="hx-matrix-demo" aria-hidden="true"><div class="hx-matrix-source"><div class="hx-matrix"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span>CORE</span></div><div class="hx-static-arrow">→</div><div class="hx-matrix-target"><div class="hx-tiles" data-hx-tiles style="--hx-multiplier:2"></div><span>TILE + RESCALE</span></div></div>
+        <p class="hx-small-note">Repeat the matrix across both dimensions, then rescale.</p>
+      </div>
+      <div class="hx-depth-demo">
+        <div class="hx-control-heading"><div><span class="hx-overline">MAKE IT DEEPER</span><h3>Unroll the middle.</h3></div><label class="hx-depth-select"><span class="hx-sr-only">Illustrative target depth</span><select data-hx-depth><option value="6">6 blocks</option><option value="12" selected>12 blocks</option><option value="24">24 blocks</option></select><span aria-hidden="true">⌄</span></label></div>
+        <div class="hx-unroll-guide" aria-hidden="true"><span>↻</span> SHARED MIDDLE <b>→</b> INDEPENDENT COPIES</div>
+        <div class="hx-depth-model" aria-hidden="true"><div class="hx-depth-bookend"><i></i><span>First</span></div><div class="hx-depth-middle"><div class="hx-depth-copies" data-hx-copies></div><span data-hx-middle-label>Middle × 10</span></div><div class="hx-depth-bookend"><i></i><span>Last</span></div></div>
+        <p class="hx-small-note">Keep the first and last blocks. Copy the middle into each new layer.</p>
+      </div>
+    </div>
+    <div class="hx-panel-foot hx-expand-foot"><p id="hx-expand-status" role="status" aria-live="polite" aria-atomic="true">2× width · 12 target blocks · 10 middle copies</p><span>Illustrative matrices and configurations</span></div>
+  </div>
+
+  <div class="hx-panel" id="hx-panel-train" role="tabpanel" aria-labelledby="hx-tab-train" tabindex="0" hidden>
+    <div class="hx-train-scene">
+      <div class="hx-real-data"><span class="hx-overline">REAL IMAGES</span><div class="hx-image-stack"><img src="assets/stimuli/8.png" width="224" height="224" alt="Golf flag" loading="lazy"><img src="assets/stimuli/15.png" width="224" height="224" alt="French horn" loading="lazy"><img src="assets/stimuli/2.png" width="224" height="224" alt="Car stereo" loading="lazy"></div><span class="hx-caption">Standard task training</span></div>
+      <div class="hx-flow hx-image-flow" aria-hidden="true"><span></span><b>›</b><i></i></div>
+      <div class="hx-untied-model"><span class="hx-overline">EXPANDED TARGET</span><div class="hx-untied-blocks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="hx-caption">Untied layers<br>Learn together</span></div>
+      <div class="hx-performance"><span class="hx-overline">PAPER-REPORTED RESULT</span><div class="hx-accuracy"><div><span>Default</span><strong>77.6<small>%</small></strong></div><b aria-hidden="true">→</b><div><span>Procedural Core</span><strong>79.8<small>%</small></strong></div></div><p class="hx-gain"><strong>+2.2 pp</strong> ImageNet top-1 accuracy</p><p class="hx-result-context">ViT-Base · ImageNet-1K · 300 epochs</p><a class="hx-next" href="#results">See the full evaluation <span aria-hidden="true">↗</span></a></div>
+    </div>
+    <div class="hx-panel-foot"><span class="hx-status-dot" aria-hidden="true"></span><p>The core supplies the initialization. Real data trains the target for the task.</p></div>
+  </div>
+  <noscript><p class="hx-no-script">Enable JavaScript to explore width, depth, and the three stages. The complete method is explained below.</p></noscript>
+</div>
+
     <div class="authors"><p>Zachary Shinnick<sup>1</sup><span>·</span> Christian Internò<sup>2</sup><span>·</span> Hemanth Saratchandran<sup>1</sup><span>·</span> Anton van den Hengel<sup>1,4</sup><span>·</span> Damien Teney<sup>3</sup></p><div><span><sup>1</sup> AIML, Adelaide University</span><span><sup>2</sup> Bielefeld University</span><span><sup>3</sup> Idiap Research Institute</span><span><sup>4</sup> Metacognition AI</span></div></div>
   </section>
   <section class="metrics container" aria-label="Key paper results"><div><strong>~1M <span>→</span> 85M</strong><p>From compact core to ViT-Base</p></div><div><strong>+2.2<span>pp</span></strong><p>ImageNet-1K top-1 accuracy</p></div><div><strong>+10.6<span>pts</span></strong><p>ImageNet-S segmentation mAP</p></div></section>
   <section id="method" class="section container">
     <div class="section-heading"><div><p class="eyebrow section-number">01 / THE IDEA</p><h2>Learn once.<br><span>Initialize many.</span></h2></div><p>Procedural warm-up learns useful structure, but has to be repeated for each model. Procedural Core compresses that structure into a small set of weights you can reuse.</p></div>
-    <figure class="film"><video id="method-video" controls playsinline muted loop preload="none" poster="assets/method-poster.png" width="1280" height="720" aria-label="16-second animated explanation of learning a core, expanding the weights, and training the target on images"><source src="assets/method.mp4" type="video/mp4"><a href="assets/method.mp4">Download the method animation</a></video><figcaption><span>THE METHOD IN 16 SECONDS</span><a href="assets/method.mp4" download>Download animation ↓</a></figcaption></figure>
-    <div class="steps"><article><span>01</span><h3>Learn abstract structure.</h3><p>A small transformer learns from nested procedural tokens. It has just three unique blocks: a first block, a shared recurrent middle block, and a last block.</p></article><article><span>02</span><h3>Expand the weights.</h3><p>Unroll the middle block to increase depth. Tile and rescale weight matrices to increase width. The compact core becomes the target model’s initialization.</p></article><article><span>03</span><h3>Train as usual.</h3><p>The target layers are untied and free to diverge during standard training on real data. The core supplies a starting point; the target still learns the task.</p></article></div>
+    <figure class="film"><video id="method-video" controls playsinline muted loop preload="none" poster="assets/method-sequence-poster.png" width="1280" height="720" aria-label="31-second animated explanation: abstract tokens train a recurrent core, width tiling and depth unrolling initialize a larger model, then real images train it to improve ImageNet accuracy"><source src="assets/method-sequence.mp4" type="video/mp4"><a href="assets/method-sequence.mp4">Download the method animation</a></video><figcaption><span>THE METHOD IN 31 SECONDS</span><a href="assets/method-sequence.mp4" download>Download animation ↓</a></figcaption></figure>
+    <div class="steps"><article><span>01</span><h3>Learn abstract structure.</h3><p>A small transformer learns from nested procedural tokens. It has just three unique blocks: a first block, a shared recurrent middle block, and a last block.</p></article><article><span>02</span><h3>Expand the weights.</h3><p>Tile and rescale weight matrices to increase width. Then unroll the middle block to increase depth. The compact core becomes the target model’s initialization.</p></article><article><span>03</span><h3>Train as usual.</h3><p>The target layers are untied and free to diverge during standard training on real data. The core supplies a starting point; the target still learns the task.</p></article></div>
     <p class="quiet-note">~1M → 85M describes the initialization’s parameter expansion. The resulting ViT-Base still has ~85M parameters.</p>
   </section>
   <section id="results" class="section results-section">
@@ -68,14 +114,14 @@
   <section id="insights" class="section container">
     <div class="section-heading"><div><p class="eyebrow section-number">03 / INSIDE THE MODEL</p><h2>Less distraction.<br><span>More spatial structure.</span></h2></div><p>Procedural Core suppresses high-norm token outliers. Explore the actual token-norm maps across layers to see how the internal representations change.</p></div>
     <div class="map-explorer" id="map-explorer"><div class="explorer-toolbar"><div class="stimulus-options" aria-label="Select an example image"><button data-stimulus="0" aria-pressed="true">Golf flag</button><button data-stimulus="1" aria-pressed="false">Golf ball</button><button data-stimulus="2" aria-pressed="false">French horn</button><button data-stimulus="3" aria-pressed="false">Car stereo</button></div><span class="result-chip">ACTUAL MODEL ACTIVATIONS</span></div>
-      <div class="maps"><figure><figcaption>Input image</figcaption><img id="stimulus-image" src="assets/stimuli/8.png" width="224" height="224" alt="Golf flag example used in the token-norm experiment" loading="lazy"></figure><figure><figcaption>Default initialization</figcaption><canvas id="baseline-map" width="280" height="280" role="img" aria-label="Normalized token norms for default initialization at layer 12"></canvas></figure><figure><figcaption><span class="lime">Procedural Core</span></figcaption><canvas id="core-map" width="280" height="280" role="img" aria-label="Normalized token norms for Procedural Core at layer 12"></canvas></figure></div>
+      <div class="maps"><figure><figcaption>Input image</figcaption><img id="stimulus-image" src="assets/stimuli/8.png" width="224" height="224" alt="Golf flag example used in the token-norm experiment" loading="lazy"></figure><figure><figcaption>Default initialization</figcaption><canvas id="baseline-map" width="280" height="280" role="img" aria-label="Normalized token norms for default initialization at layer 12"></canvas></figure><figure><figcaption><span class="accent">Procedural Core</span></figcaption><canvas id="core-map" width="280" height="280" role="img" aria-label="Normalized token norms for Procedural Core at layer 12"></canvas></figure></div>
       <div class="layer-control"><label for="layer-slider">Transformer layer <output id="layer-output" for="layer-slider">12 / 12</output></label><input id="layer-slider" type="range" min="1" max="12" step="1" value="12" aria-describedby="map-note"><div class="range-labels"><span>Early layers</span><span>Deep layers</span></div></div>
       <div class="map-bottom"><p id="map-status" role="status">Golf flag · Layer 12 of 12</p><div class="color-legend"><span>Low</span><span class="color-scale"></span><span>High norm</span></div></div>
     </div>
     <p id="map-note" class="figure-note">Each heatmap is independently normalized per image, model, and layer (0–1). Colors reveal spatial patterns, not absolute norm differences. Source: supplied activation arrays, corresponding to the paper’s token-norm analysis.</p>
     <div class="insight-summary"><div><span class="eyebrow">PEAK ATTENTION MASS TO OUTLIER TOKENS</span><div class="value-pair"><span>50.4%</span><i>→</i><strong>17.7%</strong></div><p>Default → Core. Peak across layers, measured over 200 ImageNet images.</p></div><div><h3>A different internal organization.</h3><p>The attention value/output pathway carries much of the transferable structure. Shuffling it removes much of the benefit, connecting the learned initialization to outlier suppression and improved spatial representations.</p><a class="text-link" href="assets/procedural-core-paper.pdf#page=8">Read the mechanistic analysis ↗</a></div></div>
   </section>
-  <section id="paper" class="section resources-section"><div class="container"><p class="eyebrow section-number">04 / KEEP EXPLORING</p><div class="paper-card"><div><span class="tag">PREPRINT · 2026</span><h2>Procedural Core:<br>A Compact Recurrent Initialization<br>for Vision Transformers</h2><p>Zachary Shinnick · Christian Internò · Hemanth Saratchandran<br>Anton van den Hengel · Damien Teney</p><a class="button primary" href="assets/procedural-core-paper.pdf">Read the full paper <span aria-hidden="true">↗</span></a></div><aside><p class="eyebrow">RESEARCH MATERIALS</p><a href="assets/procedural-core-paper.pdf" download>Paper PDF <span>↓</span></a><a href="assets/method.mp4" download>Method animation <span>↓</span></a><a href="assets/results.json" download>Reported results <span>↓</span></a><div class="release-note"><strong>Research code</strong><p>Release planned upon publication.</p></div></aside></div><div class="citation"><div class="citation-heading"><h3>Cite this work</h3><button id="copy-citation" aria-describedby="copy-status">Copy BibTeX <span aria-hidden="true">⧉</span></button></div><pre><code id="bibtex">@misc{shinnick2026proceduralcore,
+  <section id="paper" class="section resources-section"><div class="container"><p class="eyebrow section-number">04 / KEEP EXPLORING</p><div class="paper-card"><div><span class="tag">PREPRINT · 2026</span><h2>Procedural Core:<br>A Compact Recurrent Initialization<br>for Vision Transformers</h2><p>Zachary Shinnick · Christian Internò · Hemanth Saratchandran<br>Anton van den Hengel · Damien Teney</p><a class="button primary" href="assets/procedural-core-paper.pdf">Read the full paper <span aria-hidden="true">↗</span></a></div><aside><p class="eyebrow">RESEARCH MATERIALS</p><a href="assets/procedural-core-paper.pdf" download>Paper PDF <span>↓</span></a><a href="assets/method-sequence.mp4" download>Method animation <span>↓</span></a><a href="assets/results.json" download>Reported results <span>↓</span></a><div class="release-note"><strong>Research code</strong><p>Release planned upon publication.</p></div></aside></div><div class="citation"><div class="citation-heading"><h3>Cite this work</h3><button id="copy-citation" aria-describedby="copy-status">Copy BibTeX <span aria-hidden="true">⧉</span></button></div><pre><code id="bibtex">@misc{shinnick2026proceduralcore,
   title = {Procedural Core: A Compact Recurrent Initialization
            for Vision Transformers},
   author = {Shinnick, Zachary and Internò, Christian and
@@ -86,6 +132,6 @@
   url = {https://zlshinnick.github.io/procedural-core-page/}
 }</code></pre><span id="copy-status" role="status"></span></div></div></section>
   </main>
-  <footer class="container footer"><a class="wordmark" href="#">▦ &nbsp;Procedural Core</a><p>A compact recurrent initialization for vision transformers.</p><a href="https://zlshinnick.github.io/procedural-pretraining-page/">Previously: Procedural Pretraining ↗</a></footer>
-<script src="app.js" defer></script>
+  <footer class="container footer"><a class="wordmark" href="#"><img class="brand-icon" src="assets/logo.svg" width="48" height="30" alt="">Procedural Core</a><p>A compact recurrent initialization for vision transformers.</p><a href="https://zlshinnick.github.io/procedural-pretraining-page/">Previously: Procedural Pretraining ↗</a></footer>
+<script src="app.js" defer></script><script src="hero.js" defer></script>
 </body></html>

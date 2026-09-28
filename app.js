@@ -1,5 +1,5 @@
 /* Procedural Core. Static page; interactions use only the supplied research data. */
-const tabs = [...document.querySelectorAll('[role="tab"]')];
+const tabs = [...document.querySelectorAll('#results [role="tab"]')];
 function selectTab(tab) {
   tabs.forEach(item => {
     const active = item === tab;
@@ -32,14 +32,14 @@ function draw(tag, attrs, text) {
 const x = value => 300 + (value - 76) * 108;
 for (let tick = 76; tick <= 81; tick++) {
   draw('line', {x1:x(tick),x2:x(tick),y1:32,y2:271,stroke:'#2c3135','stroke-dasharray':'3 6'});
-  draw('text', {x:x(tick),y:302,'text-anchor':'middle',fill:'#a6abae','font-size':14}, tick + '%');
+  draw('text', {x:x(tick),y:302,'text-anchor':'middle',fill:'#a8b1bf','font-size':14}, tick + '%');
 }
 const results = [{name:'Default initialization',mean:77.6,sd:.2},{name:'Mimetic initialization',mean:79.5,sd:.7},{name:'Procedural warm-up',mean:79.4,sd:.3},{name:'Procedural Core',mean:79.8,sd:.6}];
 results.forEach((result, i) => {
   const y = 59 + i * 62;
-  const color = i === 3 ? '#c6ff6b' : '#9ba7ac';
-  if (i === 3) draw('rect', {x:0,y:y-28,width:977,height:56,rx:5,fill:'#c6ff6b09'});
-  draw('text', {x:18,y:y+6,fill:i===3?'#c6ff6b':'#d5dad7','font-size':17},result.name);
+  const color = i === 3 ? '#7db7ff' : '#9ba7ac';
+  if (i === 3) draw('rect', {x:0,y:y-28,width:977,height:56,rx:5,fill:'#7db7ff09'});
+  draw('text', {x:18,y:y+6,fill:i===3?'#7db7ff':'#d5dad7','font-size':17},result.name);
   draw('line',{x1:x(result.mean-result.sd),x2:x(result.mean+result.sd),y1:y,y2:y,stroke:color,'stroke-width':2});
   [result.mean-result.sd,result.mean+result.sd].forEach(v => draw('line',{x1:x(v),x2:x(v),y1:y-7,y2:y+7,stroke:color,'stroke-width':2}));
   draw('circle',{cx:x(result.mean),cy:y,r:i===3?7:5,fill:color});

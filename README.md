@@ -24,8 +24,12 @@ GitHub Pages serves the root directory of the `main` branch. Push a commit to de
 - Spatial-task values: rounded values reported in the manuscript.
 - Language results: paper Figure 4; a separately trained architecture-compatible GPT-style core.
 - `assets/heatmaps.json` and `assets/stimuli/`: original supplied activation data and unmodified RGB stimuli from `ECCV2026/christian/iclr_arrays.npz`. Each map is independently normalized per model, stimulus, and layer. Values rounded to five decimal places for size.
-- `assets/method.mp4`: silent 16-second explanatory schematic, not experimental footage. H.264, 1280×720, 24 fps.
+- `assets/method-sequence.mp4`: silent 31-second sequential explanation: abstract-data recurrence, matrix tiling, depth unrolling, then image training and paper-reported ImageNet performance. Diagrams are explanatory schematics. H.264, 1280×720, 24 fps.
 - Code is labeled planned for release upon publication, matching the manuscript. Add the verified release link when available.
+
+The interactive hero steps through learning, expansion, and training. Its width controls tile illustrative matrices at 1×, 2×, and 4×; depth controls build 6, 12, or 24 blocks with distinct first/last blocks. These controls are method illustrations, not performance predictions. Motion can be paused and respects reduced-motion preferences.
+
+The header/footer logo and favicon depict a compact core expanding into a weight matrix. The blue accent matches the paper’s visual direction.
 
 The page has no tracking, external scripts, analytics, or third-party embeds. Research claims, publication status, and citation details should be updated together if the manuscript changes.
 
