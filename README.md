@@ -10,11 +10,13 @@ Public address: https://zlshinnick.github.io/procedural-core-page/
 python3 -m http.server 4173
 ```
 
-Open http://localhost:4173. No framework, build step, package installation, or remote runtime dependencies are required. Fonts are served locally.
+Open http://localhost:4173 to preview the preserved full research page, or http://localhost:4173/docs/ to preview the temporary coming-soon page. No framework, build step, package installation, or remote runtime dependencies are required. Fonts are served locally.
 
 ## Publishing
 
-GitHub Pages serves the root directory of the `main` branch. Push a commit to deploy. All resource paths are relative to support project Pages URLs.
+GitHub Pages temporarily serves the `docs/` directory of the `main` branch. Only the coming-soon page and its own assets are published. The complete research site remains at the repository root, ready for launch.
+
+To launch the full site, change the GitHub Pages publishing source from `main /docs` to `main /` in repository Settings → Pages. The public address stays the same. Subsequent pushes deploy the selected source. All resource paths are relative to support project Pages URLs.
 
 ## Content and provenance
 
