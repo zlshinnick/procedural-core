@@ -2,7 +2,7 @@
 
 Research project page for *Procedural Core: A Compact Recurrent Initialization for Vision Transformers* (preprint, 2026).
 
-Public address: https://zlshinnick.github.io/procedural-core-page/
+Public address: https://zlshinnick.github.io/procedural-core/
 
 ## Run locally
 
