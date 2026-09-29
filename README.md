@@ -18,6 +18,8 @@ GitHub Pages temporarily serves the `docs/` directory of the `main` branch. Only
 
 The temporary page follows the Procedural Pretraining site's light academic theme: white and soft gray surfaces, Source Serif 4 headings, Inter body text, and restrained blue accents. Its fonts are served locally, with licenses in `docs/assets/font-licenses/`.
 
+Its author and affiliation layout matches the Beyond Perplexity coming-soon page, with the correct paper-specific authors and institutions. Affiliation logos include the combined Adelaide University / AIML image and Metacognition image supplied by the user, Bielefeld University, and Idiap. Bielefeld’s vector mark and lettering come from the header of its official [logo page](https://www.uni-bielefeld.de/uni/presse-medien/logo/). Supplied images are preserved unchanged. They form a desktop row and a two-column grid on smaller screens.
+
 To launch the full site, change the GitHub Pages publishing source from `main /docs` to `main /` in repository Settings → Pages. The public address stays the same. Subsequent pushes deploy the selected source. All resource paths are relative to support project Pages URLs.
 
 ## Content and provenance

@@ -16,7 +16,8 @@
 
 :root {
   color-scheme: light;
-  --blue: #2563eb;
+  --accent: #2563eb;
+  --accent-ink: #2455b5;
   --muted: #555566;
   --border: #e2e4e9;
   background: #fff;
@@ -38,8 +39,8 @@ body {
 }
 
 a { color: inherit; text-decoration: none; }
-a:hover { color: var(--blue); }
-a:focus-visible { outline: 2px solid var(--blue); outline-offset: 5px; border-radius: 2px; }
+a:hover { color: var(--accent-ink); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; border-radius: 2px; }
 
 header {
   flex-shrink: 0;
@@ -66,11 +67,11 @@ main {
   width: 100%;
   max-width: 1100px;
   margin: auto;
-  padding: 80px 24px 96px;
+  padding: 48px 24px 60px;
   text-align: center;
 }
 
-.identity { margin: 0 auto 35px; width: 145px; height: 90px; }
+.identity { margin: 0 auto 26px; width: 145px; height: 90px; }
 .identity img { display: block; width: 100%; height: 100%; }
 
 .status {
@@ -91,12 +92,12 @@ main {
   text-transform: uppercase;
 }
 
-.status span { width: 5px; height: 5px; border-radius: 50%; background: var(--blue); }
+.status span { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
 
 h1 {
   margin: 0;
   font-family: "Source Serif 4", Georgia, serif;
-  font-size: clamp(39px, 5.4vw, 60px);
+  font-size: clamp(35px, 5.4vw, 60px);
   font-weight: 800;
   letter-spacing: -.025em;
   line-height: 1.18;
@@ -113,25 +114,66 @@ h1 {
 
 .note { margin: 30px 0 0; color: #6b6b7b; font-size: 14px; line-height: 1.7; }
 
-footer {
-  flex-shrink: 0;
-  padding: 23px 24px;
-  border-top: 1px solid var(--border);
-  text-align: center;
+::selection { background: #dbeafe; color: #1a1a2e; }
+
+/* Keep the publication's existing authors and affiliation marks. */
+.authors {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 22px;
+  margin: 27px auto 0;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.7;
+}
+.authors a { text-decoration: underline; text-decoration-color: #d6d6de; text-underline-offset: 4px; }
+sup { margin-left: 2px; font-size: .65em; vertical-align: super; }
+.affiliations {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px 20px;
+  margin: 9px auto 0;
   color: #6b6b7b;
   font-size: 12px;
-  line-height: 1.6;
+  line-height: 1.7;
 }
+.institution-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  margin: 24px auto 0;
+}
+.institution-logos img { display: block; object-fit: contain; height: auto; max-width: 100%; mix-blend-mode: multiply; }
+.logo-adelaide-aiml { width: 200px; }
+.logo-bielefeld { width: 145px; }
+.logo-idiap { width: 130px; }
+.logo-metacognition { width: 200px; }
+.skip-link { position: fixed; top: -70px; left: 16px; z-index: 10; padding: 10px 16px; background: #fff; color: #1a1a2e; }
+.skip-link:focus { top: 12px; }
 
-::selection { background: #dbeafe; color: #1a1a2e; }
+@media (max-width: 900px) {
+  main { padding: 44px 24px 52px; }
+  .authors { max-width: 490px; }
+  .institution-logos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 28px; max-width: 380px; justify-items: center; }
+  .institution-logos img:first-child:nth-last-child(3) { grid-column: 1 / -1; }
+}
 
 @media (max-width: 480px) {
   .header-inner { min-height: 62px; padding: 12px 20px; gap: 16px; }
   .brand { font-size: 13px; }
   .previous { max-width: 136px; font-size: 11px; text-align: right; }
-  main { padding: 60px 20px 68px; }
-  .identity { width: 116px; height: 72px; margin-bottom: 30px; }
-  .tagline { max-width: 285px; margin-top: 19px; }
-  .note { margin-top: 24px; font-size: 13px; }
-  footer { padding: 20px; font-size: 11px; }
+  main { padding: 38px 20px 44px; }
+  .identity { width: 116px; height: 72px; margin-bottom: 25px; }
+  .tagline { max-width: 300px; margin-top: 18px; }
+  .authors { max-width: 350px; gap: 7px 16px; font-size: 12px; margin-top: 25px; }
+  .affiliations { max-width: 330px; gap: 4px 13px; font-size: 11px; }
+  .institution-logos { margin-top: 26px; max-width: 350px; gap: 21px 22px; }
+  .logo-adelaide-aiml { width: 185px; }
+  .logo-bielefeld { width: 140px; }
+  .logo-idiap { width: 118px; }
+  .logo-metacognition { width: 165px; }
+  .note { margin-top: 26px; font-size: 13px; }
 }
