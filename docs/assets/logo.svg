@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 58 36" fill="none">
   <title>A compact core expanded into a larger weight matrix</title>
-  <rect x="2" y="14" width="8" height="8" rx="1" fill="#7db7ff"/>
-  <path d="M14 18h8m-3-3 3 3-3 3" stroke="#7db7ff" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-  <g fill="#7db7ff" fill-opacity=".16" stroke="#7db7ff" stroke-width=".85">
+  <rect x="2" y="14" width="8" height="8" rx="1" fill="#2563eb"/>
+  <path d="M14 18h8m-3-3 3 3-3 3" stroke="#2563eb" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#2563eb" fill-opacity=".16" stroke="#2563eb" stroke-width=".85">
     <rect x="26" y="3" width="8" height="8" rx="1"/>
     <rect x="37" y="3" width="8" height="8" rx="1"/>
     <rect x="48" y="3" width="8" height="8" rx="1"/>
