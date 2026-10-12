@@ -1,57 +1,131 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Procedural Core: A Compact Recurrent Initialization for Vision Transformers</title>
+  <meta name="description" content="A ~1M-parameter recurrent core trained on abstract data initializes an 85M-parameter ViT-Base, improving ImageNet-1K top-1 accuracy by 2.2 percentage points under the evaluated 300-epoch recipe.">
   <meta name="theme-color" content="#ffffff">
-  <title>Procedural Core — Coming soon</title>
-  <meta name="description" content="A better starting point for transformers. The Procedural Core research project website is coming soon.">
+  <meta property="og:title" content="Procedural Core: A Compact Recurrent Initialization for Vision Transformers"><meta property="og:description" content="A compact recurrent initialization for vision transformers. A ~1M-parameter core initializes an 85M-parameter ViT-Base."><meta property="og:type" content="website"><meta property="og:url" content="https://zlshinnick.github.io/procedural-core/">
+  <meta name="twitter:card" content="summary"><meta name="twitter:title" content="Procedural Core"><meta name="twitter:description" content="Learn a compact recurrent initialization from abstract data, then expand its weights for larger vision transformers.">
   <link rel="canonical" href="https://zlshinnick.github.io/procedural-core/">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Procedural Core — Coming soon">
-  <meta property="og:description" content="A better starting point for transformers. Project website coming soon.">
-  <meta property="og:url" content="https://zlshinnick.github.io/procedural-core/">
-  <meta name="twitter:card" content="summary">
-  <link rel="icon" href="assets/favicon.svg?v=2" type="image/svg+xml">
-  <link rel="preload" href="assets/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/source-serif-4-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="coming-soon.css?v=affiliations">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="fonts.css"><link rel="stylesheet" href="styles.css?v=spatial-card-fix"><link rel="stylesheet" href="hero.css?v=core-labels">
+  <link rel="stylesheet" href="academic.css">
+  <link rel="stylesheet" href="reference-theme.css?v=overview-gap-mechanism">
+<meta name="citation_title" content="Procedural Core: A Compact Recurrent Initialization for Vision Transformers">
+<meta name="citation_pdf_url" content="https://arxiv.org/pdf/2609.37631">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <header>
-    <nav class="header-inner" aria-label="Main navigation">
-      <a class="brand" href="./">Procedural Core</a>
-      <a class="previous" href="https://zlshinnick.github.io/procedural-pretraining-page/">Procedural Pretraining <span aria-hidden="true">↗</span></a>
-    </nav>
-  </header>
+  <header class="header"><div class="header-inner"><a class="wordmark" href="#"><img class="brand-icon" src="assets/logo.svg" width="48" height="30" alt=""> Procedural Core</a><button aria-label="Toggle navigation" class="nav-toggle" aria-expanded="false" aria-controls="core-navigation"><span></span><span></span><span></span></button><nav id="core-navigation" aria-label="Main navigation"><a href="#overview">Overview</a><a href="#method">Method</a><a href="#results">Results</a><a href="#insights">Insights</a><a href="https://arxiv.org/pdf/2609.37631" class="nav-paper">Read paper <span aria-hidden="true">↗</span></a></nav></div></header>
   <main id="main">
-    <div class="identity" aria-hidden="true">
-      <img src="assets/logo.svg?v=2" alt="" width="145" height="90">
+  <section class="hero container" aria-labelledby="hero-title">
+    <div class="eyebrow"><span class="tag">ARXIV PREPRINT</span><span>2026</span></div>
+    <h1 id="hero-title">Procedural Core</h1><p class="paper-subtitle">A Compact Recurrent Initialization for Vision Transformers</p>
+    <div class="institution-row" aria-label="Research institutions"><img class="adelaide" src="assets/logo-adelaide-aiml.png" alt="Adelaide University and Australian Institute for Machine Learning"><img src="assets/logo-bielefeld.svg" alt="Bielefeld University"><img src="assets/logo-metacognition.png" alt="Metacognition AI"><img src="assets/logo-idiap.png" alt="Idiap Research Institute"></div>
+<div class="authors"><p><span class="author">Zachary Shinnick<sup>1</sup></span> <span class="author">Christian Internò<sup>2</sup></span> <span class="author">Hemanth Saratchandran<sup>1</sup></span> <span class="author">Anton van den Hengel<sup>1,3</sup></span> <span class="author">Damien Teney<sup>4</sup></span></p><div><span><sup>1</sup> AIML, Adelaide University</span><span><sup>2</sup> Bielefeld University</span><span><sup>3</sup> Metacognition AI</span><span><sup>4</sup> Idiap Research Institute</span></div></div>
+    <div class="hero-copy"><h2>A compact, reusable initialization.</h2></div>
+    <div class="hero-actions"><a class="button primary" href="https://arxiv.org/pdf/2609.37631">Read the paper <span aria-hidden="true">↗</span></a><a class="button secondary" href="#method">See how it works <span aria-hidden="true">↓</span></a></div>
+<div class="hx-explorer" id="hero-explorer" aria-label="Explore how Procedural Core works">
+  <div class="hx-topline"><p class="hx-kicker">Learning a core set of weights</p><button class="hx-motion" type="button" hidden><span aria-hidden="true">Ⅱ</span> Pause motion</button></div>
+  <div class="hx-tabs" role="tablist" aria-label="Explore learning and expansion" hidden>
+    <button id="hx-tab-learn" type="button" role="tab" aria-selected="true" aria-controls="hx-panel-learn" data-hx-stage="learn"><span>01</span> Learn <i aria-hidden="true">↗</i></button>
+    <button id="hx-tab-expand" type="button" role="tab" aria-selected="false" aria-controls="hx-panel-expand" tabindex="-1" data-hx-stage="expand"><span>02</span> Expand <i aria-hidden="true">↗</i></button>
+  </div>
+
+  <div class="hx-panel" id="hx-panel-learn" role="tabpanel" aria-labelledby="hx-tab-learn" tabindex="0">
+    <div class="hx-learn-scene">
+      <div class="hx-source">
+        <span class="hx-overline">Non-visual procedurally generated data</span>
+        <div class="hx-tokens" aria-label="Abstract nested tokens"><div>( <b>[</b> { } <b>]</b> )</div><div><b>{</b> ( [ ] ) <b>}</b></div><div>[ <b>{</b> ( ) <b>}</b> ]</div><div><b>(</b> { [ ] } <b>)</b></div><div>{ <b>[</b> ( ) <b>]</b> }</div></div>
+
+      </div>
+      <div class="hx-flow" aria-hidden="true"><span></span><b>›</b><i>[ ]</i><i>{ }</i><i>( )</i><i>[ ]</i></div>
+      <div class="hx-core">
+        <span class="hx-overline">COMPACT CORE</span>
+        <div class="hx-core-block">First block</div>
+        <div class="hx-recurrent"><div class="hx-core-block hx-middle">Shared middle block <span class="hx-loop" aria-hidden="true">↻</span></div><span class="hx-loop-path" aria-hidden="true"></span></div>
+        <div class="hx-core-block">Last block</div>
+        <span class="hx-caption"><strong>~1M</strong> parameters · 3 unique blocks</span>
+      </div>
     </div>
-    <p class="status"><span aria-hidden="true"></span>Coming soon</p>
-    <h1>Procedural Core</h1>
-    <p class="tagline">A better starting point for transformers.</p>
-    <div class="authors" aria-label="Authors">
-      <span>Zachary Shinnick<sup>1</sup></span>
-      <span>Christian Internò<sup>2</sup></span>
-      <span>Hemanth Saratchandran<sup>1</sup></span>
-      <span>Anton van den Hengel<sup>1,3</sup></span>
-      <span>Damien Teney<sup>4</sup></span>
+    <div class="hx-panel-foot"><span class="hx-status-dot" aria-hidden="true"></span><p>One small recurrent model learns a reusable initialization for ViTs of different widths and depths. Motion is schematic.</p></div>
+  </div>
+
+  <div class="hx-panel" id="hx-panel-expand" role="tabpanel" aria-labelledby="hx-tab-expand" tabindex="0" hidden>
+    <div class="hx-expand-scene">
+      <div class="hx-width-demo">
+        <div class="hx-control-heading"><div><span class="hx-overline">MAKE IT WIDER</span><h3>Tile the weights.</h3></div><fieldset class="hx-choice"><legend class="hx-sr-only">Illustrative width multiplier</legend><label><input type="radio" name="hx-width" value="1"><span>1×</span></label><label><input type="radio" name="hx-width" value="2" checked><span>2×</span></label><label><input type="radio" name="hx-width" value="4"><span>4×</span></label></fieldset></div>
+        <div class="hx-matrix-demo" aria-hidden="true"><div class="hx-matrix-source"><div class="hx-matrix"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span>CORE</span></div><div class="hx-static-arrow">→</div><div class="hx-matrix-target"><div class="hx-tiles" data-hx-tiles style="--hx-multiplier:2"></div><span>TILE + RESCALE</span></div></div>
+        <p class="hx-small-note">Tile each matrix across both dimensions, then rescale to preserve its Frobenius norm.</p>
+      </div>
+      <div class="hx-depth-demo">
+        <div class="hx-control-heading"><div><span class="hx-overline">MAKE IT DEEPER</span><h3>Unroll the middle.</h3></div><label class="hx-depth-select"><span class="hx-sr-only">Illustrative target depth</span><select data-hx-depth><option value="6">6 blocks</option><option value="12" selected>12 blocks</option><option value="24">24 blocks</option></select><span aria-hidden="true">⌄</span></label></div>
+        <div class="hx-unroll-guide" aria-hidden="true"><span>↻</span> SHARED MIDDLE <b>→</b> INDEPENDENT COPIES</div>
+        <div class="hx-depth-model" aria-hidden="true"><div class="hx-depth-bookend"><i></i><span>First</span></div><div class="hx-depth-middle"><div class="hx-depth-copies" data-hx-copies></div><span data-hx-middle-label>Middle × 10</span></div><div class="hx-depth-bookend"><i></i><span>Last</span></div></div>
+        <p class="hx-small-note">Retain the first and last blocks. Initialize each middle layer with a separate copy of the shared weights.</p>
+      </div>
     </div>
-    <div class="affiliations" aria-label="Affiliations">
-      <span><sup>1</sup> AIML, Adelaide University</span>
-      <span><sup>2</sup> Bielefeld University</span>
-      <span><sup>3</sup> Metacognition AI</span>
-      <span><sup>4</sup> Idiap Research Institute</span>
+    <div class="hx-panel-foot hx-expand-foot"><p id="hx-expand-status" role="status" aria-live="polite" aria-atomic="true">2× width · 12 target blocks · 10 middle copies</p><span>Illustrative matrices and configurations</span></div>
+  </div>
+
+  <noscript><p class="hx-no-script">Enable JavaScript to explore learning, width, and depth. The complete method is explained below.</p></noscript>
+</div>
+
+
+  </section>
+  <section class="metrics container" aria-label="Key paper results"><div><strong class="parameter-comparison"><span class="parameter-size">1 million parameters</span> <span class="parameter-arrow">→</span> <span class="parameter-size">85 million parameters</span></strong><p>Compact core → ViT-Base</p></div><div><strong>+2.2<span>pp</span></strong><p>ImageNet-1K top-1 accuracy</p></div><div><strong>+10.6<span>pts</span></strong><p>ImageNet-S segmentation mAP</p></div></section>
+  <section class="section container" id="overview"><div class="abstract-copy"><h2>A reusable starting point</h2><p>Warming up a ViT on non-visual procedurally generated data can improve subsequent learning, but a separate warm-up is needed for each target model (<a href="https://arxiv.org/abs/2511.13945" title="Can You Learn to See Without Images? Procedural Warm-Up for Vision Transformers">Shinnick et al., CVPR 2026</a>). Procedural Core captures this learned structure in a compact set of recurrent weights. In our main setting, a 1-million-parameter core initializes an 85-million-parameter ViT-Base and improves final ImageNet-1K top-1 accuracy from 77.6% to 79.8%. The same set of weights initializes ViTs of different widths and depths, transferring the benefits of procedural warm-up without warming up each target model separately.</p></div></section>
+  <section id="method" class="section container">
+    <div class="section-heading"><div><p class="eyebrow section-number">01 / THE IDEA</p><h2>Recurrence learns compact weights <span>that can be expanded</span></h2></div><p>A small recurrent model first learns on non-visual procedural data. We then expand its learned weights in width and depth to initialize a larger ViT, whose layers train independently on images.</p></div>
+
+    <div class="steps"><article><span>01</span><h3>Learning Procedural Core</h3><p>Our recurrent model has three unique layers and predicts masked closing tokens in bracket sequences, with a looped middle layer.</p></article><article><span>02</span><h3>Expand the weights.</h3><p>Tile and rescale matrices to match the target width. Copy the recurrent middle block across the target’s middle layers, keeping distinct first and last blocks.</p></article><article><span>03</span><h3>Image training</h3><p>The target layers are untied and train independently during standard image training. The core provides the initialisation.</p></article></div>
+  </section>
+  <section id="results" class="section results-section">
+  <div class="container"><div class="section-heading"><div><p class="eyebrow section-number">02 / THE EVIDENCE</p><h2>Performance of Procedural Core</h2></div><p>We compare ImageNet classification accuracy across initializations, then evaluate spatial tasks with the trained backbones frozen. DINO uses the same initialisation as the supervised vision experiments. Language and code experiments use a separately trained GPT-style recurrent model matched to the target architecture.</p></div>
+    <div class="tabs" role="tablist" aria-label="Research results"><button id="tab-imagenet" role="tab" aria-selected="true" aria-controls="panel-imagenet" data-tab="imagenet">ImageNet classification</button><button id="tab-spatial" role="tab" aria-selected="false" aria-controls="panel-spatial" tabindex="-1" data-tab="spatial">Spatial tasks</button><button id="tab-dino" role="tab" aria-selected="false" aria-controls="panel-dino" tabindex="-1" data-tab="dino">DINO</button><button id="tab-language" role="tab" aria-selected="false" aria-controls="panel-language" tabindex="-1" data-tab="language">Language and code</button></div>
+    <div class="result-panel" id="panel-imagenet" role="tabpanel" aria-labelledby="tab-imagenet" tabindex="0">
+      <div class="result-intro"><div><h3>ImageNet classification</h3></div></div>
+      <div class="chart-wrap"><svg id="imagenet-chart" viewBox="0 0 980 340" role="img" aria-labelledby="chart-title chart-desc"><title id="chart-title">ImageNet top-1 accuracy by initialization</title><desc id="chart-desc">Default 77.6 plus or minus 0.2; Mimetic 79.5 plus or minus 0.7; Procedural warm-up 79.4 plus or minus 0.3; Procedural Core 79.8 plus or minus 0.6 percent. Mean and standard deviation over three seeds.</desc></svg></div>
     </div>
-    <div class="institution-logos" aria-label="Research institutions">
-      <img class="logo-adelaide-aiml" src="assets/logo-adelaide-aiml.png" alt="Adelaide University — Australian Institute for Machine Learning" width="1875" height="834">
-      <img class="logo-bielefeld" src="assets/logo-bielefeld.svg" alt="Bielefeld University" width="191" height="45">
-      <img class="logo-metacognition" src="assets/logo-metacognition.png" alt="Metacognition" width="800" height="245">
-      <img class="logo-idiap" src="assets/logo-idiap.png" alt="Idiap Research Institute" width="151" height="50">
+    <div class="result-panel" id="panel-spatial" role="tabpanel" aria-labelledby="tab-spatial" tabindex="0" hidden>
+      <div class="result-intro"><div><h3>Spatial evaluation with frozen backbones.</h3></div></div>
+      <div class="spatial-grid comparison-grid"><article><div class="eyebrow">ADE20K</div><h4>Semantic segmentation</h4><p class="mini-chart-metric">mIoU · higher is better</p><div class="mini-comparison" role="img" aria-label="ADE20K, mIoU · higher is better. Random initialization 26.6; Procedural Core 28.8."><div class="mini-chart-row"><div class="mini-chart-label"><span>Random initialization</span><strong>26.6</strong></div><div class="mini-bar-track"><span class="mini-bar random" data-value="26.6" data-max="100" style="width:26.600000%"></span></div></div><div class="mini-chart-row"><div class="mini-chart-label"><span>Procedural Core</span><strong>28.8</strong></div><div class="mini-bar-track"><span class="mini-bar core" data-value="28.8" data-max="100" style="width:28.800000%"></span></div></div><div class="mini-chart-axis" aria-hidden="true"><span>0</span><span>50</span><span>100</span></div></div><div class="gain">+2.2 points</div></article><article><div class="eyebrow">ImageNet-S</div><h4>Zero-shot segmentation</h4><p class="mini-chart-metric">mAP · higher is better</p><div class="mini-comparison" role="img" aria-label="ImageNet-S, mAP · higher is better. Random initialization 32.3; Procedural Core 42.9."><div class="mini-chart-row"><div class="mini-chart-label"><span>Random initialization</span><strong>32.3</strong></div><div class="mini-bar-track"><span class="mini-bar random" data-value="32.3" data-max="100" style="width:32.300000%"></span></div></div><div class="mini-chart-row"><div class="mini-chart-label"><span>Procedural Core</span><strong>42.9</strong></div><div class="mini-bar-track"><span class="mini-bar core" data-value="42.9" data-max="100" style="width:42.900000%"></span></div></div><div class="mini-chart-axis" aria-hidden="true"><span>0</span><span>50</span><span>100</span></div></div><div class="gain">+10.6 points</div></article><article><div class="eyebrow">VOC07</div><h4>Object localization</h4><p class="mini-chart-metric">CorLoc · higher is better</p><div class="mini-comparison" role="img" aria-label="VOC07, CorLoc · higher is better. Random initialization 9.9; Procedural Core 18.4."><div class="mini-chart-row"><div class="mini-chart-label"><span>Random initialization</span><strong>9.9</strong></div><div class="mini-bar-track"><span class="mini-bar random" data-value="9.9" data-max="100" style="width:9.900000%"></span></div></div><div class="mini-chart-row"><div class="mini-chart-label"><span>Procedural Core</span><strong>18.4</strong></div><div class="mini-bar-track"><span class="mini-bar core" data-value="18.4" data-max="100" style="width:18.400000%"></span></div></div><div class="mini-chart-axis" aria-hidden="true"><span>0</span><span>50</span><span>100</span></div></div><div class="gain">+8.5 points</div></article><article><div class="eyebrow">NYUv2</div><h4>Depth estimation</h4><p class="mini-chart-metric">RMSE (meters) · lower is better</p><div class="mini-comparison" role="img" aria-label="NYUv2, RMSE (meters) · lower is better. Random initialization 1.104; Procedural Core 0.998."><div class="mini-chart-row"><div class="mini-chart-label"><span>Random initialization</span><strong>1.104</strong></div><div class="mini-bar-track"><span class="mini-bar random" data-value="1.104" data-max="1.2" style="width:92.000000%"></span></div></div><div class="mini-chart-row"><div class="mini-chart-label"><span>Procedural Core</span><strong>0.998</strong></div><div class="mini-bar-track"><span class="mini-bar core" data-value="0.998" data-max="1.2" style="width:83.166667%"></span></div></div><div class="mini-chart-axis" aria-hidden="true"><span>0</span><span>0.6</span><span>1.2</span></div></div><div class="gain">Lower error</div></article></div>
     </div>
-    <p class="note">Project website coming soon.</p>
+    <div class="result-panel" id="panel-dino" role="tabpanel" aria-labelledby="tab-dino" tabindex="0" hidden>
+      <div class="result-intro"><div><h3>DINO self-supervised learning</h3></div></div>
+      <p class="result-metric">Weighted k-NN accuracy (%) · higher is better</p>
+      <div class="comparison-legend"><span><i class="random"></i>Random initialization</span><span><i class="core"></i>Procedural Core</span></div>
+      <div class="dino-chart" role="img" aria-label="DINO weighted k-NN accuracy on ImageNet-1K. At 100 epochs: random initialization 66.8%, Procedural Core 67.4%. At 200 epochs: 69.7% and 70.1%. At 300 epochs: 72.0% and 72.3%. Higher is better. The accuracy axis starts at zero.">
+        <div class="dino-plot"><div class="dino-gridline" style="bottom:0%"><span>0</span></div><div class="dino-gridline" style="bottom:25%"><span>25</span></div><div class="dino-gridline" style="bottom:50%"><span>50</span></div><div class="dino-gridline" style="bottom:75%"><span>75</span></div><div class="dino-gridline" style="bottom:100%"><span>100</span></div><div class="dino-groups"><div class="dino-group"><div class="dino-pair"><div class="dino-bar random" data-epoch="100" data-value="66.8" style="height:66.8%"><span>66.8</span></div><div class="dino-bar core" data-epoch="100" data-value="67.4" style="height:67.4%"><span>67.4</span></div></div><span class="dino-epoch">100</span></div><div class="dino-group"><div class="dino-pair"><div class="dino-bar random" data-epoch="200" data-value="69.7" style="height:69.7%"><span>69.7</span></div><div class="dino-bar core" data-epoch="200" data-value="70.1" style="height:70.1%"><span>70.1</span></div></div><span class="dino-epoch">200</span></div><div class="dino-group"><div class="dino-pair"><div class="dino-bar random" data-epoch="300" data-value="72.0" style="height:72.0%"><span>72.0</span></div><div class="dino-bar core" data-epoch="300" data-value="72.3" style="height:72.3%"><span>72.3</span></div></div><span class="dino-epoch">300</span></div></div></div>
+        <p class="dino-axis-label">Training epoch</p>
+      </div>
+    </div>
+    <div class="result-panel" id="panel-language" role="tabpanel" aria-labelledby="tab-language" tabindex="0" hidden>
+      <div class="result-intro"><div><h3>Language and code modeling</h3></div></div>
+      <div class="language-grid comparison-grid"><article><p class="eyebrow">NATURAL LANGUAGE</p><h4>FineWeb-Edu</h4><p class="mini-chart-metric">Validation perplexity · lower is better</p><div class="mini-comparison" role="img" aria-label="FineWeb-Edu, validation perplexity; lower is better. Random initialization 28.8; Procedural Core 27.7. Standard deviation: random 0.4; Core 0.4. Means over three seeds."><div class="mini-chart-row"><div class="mini-chart-label"><span>Random initialization</span><strong>28.8 ± 0.4</strong></div><div class="mini-bar-track"><span class="mini-bar random" data-value="28.8" data-max="32" style="width:90.000000%"></span></div></div><div class="mini-chart-row"><div class="mini-chart-label"><span>Procedural Core</span><strong>27.7 ± 0.4</strong></div><div class="mini-bar-track"><span class="mini-bar core" data-value="27.7" data-max="32" style="width:86.562500%"></span></div></div><div class="mini-chart-axis" aria-hidden="true"><span>0</span><span>16</span><span>32</span></div></div></article><article><p class="eyebrow">CODE</p><h4>CodeParrot</h4><p class="mini-chart-metric">Validation perplexity · lower is better</p><div class="mini-comparison" role="img" aria-label="CodeParrot, validation perplexity; lower is better. Random initialization 5.7; Procedural Core 5.5. Standard deviation: random 0.03; Core 0.03. Means over three seeds."><div class="mini-chart-row"><div class="mini-chart-label"><span>Random initialization</span><strong>5.7 ± 0.03</strong></div><div class="mini-bar-track"><span class="mini-bar random" data-value="5.7" data-max="6" style="width:95.000000%"></span></div></div><div class="mini-chart-row"><div class="mini-chart-label"><span>Procedural Core</span><strong>5.5 ± 0.03</strong></div><div class="mini-bar-track"><span class="mini-bar core" data-value="5.5" data-max="6" style="width:91.666667%"></span></div></div><div class="mini-chart-axis" aria-hidden="true"><span>0</span><span>3</span><span>6</span></div></div></article></div>
+    </div>
+
+    <noscript><p class="result-note">JavaScript enables the result tabs and interactive visualizations. All results and figures are available in the <a href="https://arxiv.org/pdf/2609.37631">paper</a>; ImageNet values are included in the chart’s accessible description.</p></noscript>
+  </div></section>
+  <section id="insights" class="section container">
+    <div class="section-heading"><div><p class="eyebrow section-number">03 / INSIDE THE MODEL</p><h2>Reducing <span>attention sinks</span></h2></div><p>Attention sinks are tokens that attract a disproportionate share of attention. In the trained ViTs, high-norm patch tokens show this behavior. Procedural Core reduces both these outliers and the attention they receive.</p></div>
+    <div class="attention-result"><span class="eyebrow">PEAK ATTENTION MASS TO HIGH-NORM TOKENS</span><div class="value-pair"><span>50.4%</span><i>→</i><strong>17.7%</strong></div><p>Default → Core. Peak across blocks on 200 ImageNet-1K validation images.</p><p>High-norm: above 3× the per-image median. Attention is averaged over heads, patch queries, and images; the class token is excluded. <a href="https://arxiv.org/html/2609.37631v1#S5.F9">Figure 9(d) ↗</a></p></div>
+    <div class="map-explorer" id="map-explorer"><div class="explorer-toolbar"><div class="stimulus-options" aria-label="Select an example image"><button data-stimulus="0" aria-pressed="true">Golf flag</button><button data-stimulus="1" aria-pressed="false">Golf ball</button><button data-stimulus="2" aria-pressed="false">French horn</button><button data-stimulus="3" aria-pressed="false">Car stereo</button></div></div>
+      <div class="maps"><figure><figcaption>Input image</figcaption><img id="stimulus-image" src="assets/stimuli/8.png" width="224" height="224" alt="Golf flag example used in the token-norm experiment" loading="lazy"></figure><figure><figcaption>Default initialization</figcaption><canvas id="baseline-map" width="280" height="280" role="img" aria-label="Normalized token norms for default initialization at layer 12"></canvas></figure><figure><figcaption><span class="accent">Procedural Core</span></figcaption><canvas id="core-map" width="280" height="280" role="img" aria-label="Normalized token norms for Procedural Core at layer 12"></canvas></figure></div>
+      <div class="layer-control"><label for="layer-slider">Transformer layer <output id="layer-output" for="layer-slider">12 / 12</output></label><input id="layer-slider" type="range" min="1" max="12" step="1" value="12" aria-describedby="map-note"><div class="range-labels"><span>Early layers</span><span>Deep layers</span></div></div>
+      <div class="map-bottom"><p id="map-status" role="status">Golf flag · Layer 12 of 12</p><div class="color-legend"><span>Low</span><span class="color-scale"></span><span>High norm</span></div></div>
+    </div>
+    <p id="map-note" class="figure-note">These heatmaps show hidden-state token norms, not attention weights. Each is independently normalized per image, model, and layer (0–1), so colors show spatial patterns rather than absolute norm differences.</p>
+    <div class="insight-summary"><div><h3 id="value-output-heading">The value/output pathway matters</h3><p>Shuffling value/output weights before image training restores default-like attention to high-norm tokens and removes much of the transfer benefit. Shuffling query/key weights largely preserves the reduced attention to outliers and the transfer gains (Figure 10).</p><a class="text-link mechanism-link" href="https://arxiv.org/html/2609.37631v1#S5.SS3">Read the mechanistic analysis <span aria-hidden="true">↗</span></a></div></div>
+  </section>
+  <section id="paper" class="section resources-section"><div class="container"><p class="eyebrow section-number">04 / KEEP EXPLORING</p><div class="paper-card"><div><span class="tag">PREPRINT · 2026</span><h2>Procedural Core: A Compact Recurrent Initialization for Vision Transformers</h2><p class="paper-authors">Zachary Shinnick · Christian Internò · Hemanth Saratchandran · Anton van den Hengel · Damien Teney</p><a class="button primary" href="https://arxiv.org/pdf/2609.37631">Read the full paper <span aria-hidden="true">↗</span></a></div></div><div class="citation"><div class="citation-heading"><h3>Cite this work</h3><button id="copy-citation" aria-describedby="copy-status">Copy BibTeX <span aria-hidden="true">⧉</span></button></div><pre><code id="bibtex">@article{shinnick2026proceduralcore,
+  title   = {Procedural Core: A Compact Recurrent Initialization for Vision Transformers},
+  author  = {Shinnick, Zachary and Internò, Christian and Saratchandran, Hemanth and van den Hengel, Anton and Teney, Damien},
+  journal = {arXiv preprint arXiv:2609.37631},
+  year    = {2026}
+}</code></pre><span id="copy-status" role="status"></span></div></div></section>
   </main>
-</body>
-</html>
+  <footer class="container footer"><a class="wordmark" href="#"><img class="brand-icon" src="assets/logo.svg" width="48" height="30" alt="">Procedural Core</a><p>A compact recurrent initialization for vision transformers.</p><a href="https://zlshinnick.github.io/procedural-pretraining-page/">Previously: Procedural Pretraining ↗</a></footer>
+<script src="app.js" defer></script><script src="hero.js" defer></script>
+</body></html>

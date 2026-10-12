@@ -29,22 +29,30 @@ function draw(tag, attrs, text) {
   svg.appendChild(node);
   return node;
 }
-const x = value => 300 + (value - 76) * 108;
-for (let tick = 76; tick <= 81; tick++) {
-  draw('line', {x1:x(tick),x2:x(tick),y1:32,y2:271,stroke:'#2c3135','stroke-dasharray':'3 6'});
-  draw('text', {x:x(tick),y:302,'text-anchor':'middle',fill:'#a8b1bf','font-size':14}, tick + '%');
-}
 const results = [{name:'Default initialization',mean:77.6,sd:.2},{name:'Mimetic initialization',mean:79.5,sd:.7},{name:'Procedural warm-up',mean:79.4,sd:.3},{name:'Procedural Core',mean:79.8,sd:.6}];
-results.forEach((result, i) => {
-  const y = 59 + i * 62;
-  const color = i === 3 ? '#7db7ff' : '#9ba7ac';
-  if (i === 3) draw('rect', {x:0,y:y-28,width:977,height:56,rx:5,fill:'#7db7ff09'});
-  draw('text', {x:18,y:y+6,fill:i===3?'#7db7ff':'#d5dad7','font-size':17},result.name);
-  draw('line',{x1:x(result.mean-result.sd),x2:x(result.mean+result.sd),y1:y,y2:y,stroke:color,'stroke-width':2});
-  [result.mean-result.sd,result.mean+result.sd].forEach(v => draw('line',{x1:x(v),x2:x(v),y1:y-7,y2:y+7,stroke:color,'stroke-width':2}));
-  draw('circle',{cx:x(result.mean),cy:y,r:i===3?7:5,fill:color});
-  draw('text',{x:965,y:y+5,fill:color,'font-size':17,'text-anchor':'end'},result.mean.toFixed(1)+' ± '+result.sd.toFixed(1));
-});
+const compactChart = window.matchMedia('(max-width:600px)');
+function renderImageNet() {
+  svg.querySelectorAll(':scope > :not(title):not(desc)').forEach(node=>node.remove());
+  const mobile=compactChart.matches;
+  svg.setAttribute('viewBox',mobile?'0 0 354 365':'0 0 980 340');
+  const x=value=>mobile?16+(value-76)*62:300+(value-76)*108;
+  for(let tick=76;tick<=81;tick++) {
+    draw('line',{x1:x(tick),x2:x(tick),y1:mobile?15:32,y2:mobile?325:271,stroke:'#d5deeb','stroke-dasharray':'3 6'});
+    draw('text',{x:x(tick),y:mobile?353:302,'text-anchor':'middle',fill:'#596170','font-size':mobile?12:14},tick+'%');
+  }
+  results.forEach((result,i)=>{
+    const y=mobile?56+i*83:59+i*62;
+    const color=i===3?'#285ab5':'#67758a';
+    if(i===3)draw('rect',{x:0,y:y-(mobile?38:28),width:mobile?354:977,height:mobile?70:56,rx:5,fill:'#285ab509'});
+    draw('text',{x:mobile?16:18,y:mobile?y-20:y+6,fill:i===3?'#285ab5':'#353b49','font-size':mobile?13:17},result.name);
+    draw('line',{x1:x(result.mean-result.sd),x2:x(result.mean+result.sd),y1:y,y2:y,stroke:color,'stroke-width':2});
+    [result.mean-result.sd,result.mean+result.sd].forEach(v=>draw('line',{x1:x(v),x2:x(v),y1:y-7,y2:y+7,stroke:color,'stroke-width':2}));
+    draw('circle',{cx:x(result.mean),cy:y,r:i===3?6:5,fill:color});
+    draw('text',{x:mobile?340:965,y:mobile?y-20:y+5,fill:color,'font-size':mobile?13:17,'text-anchor':'end'},result.mean.toFixed(1)+' ± '+result.sd.toFixed(1));
+  });
+}
+renderImageNet();
+compactChart.addEventListener('change',renderImageNet);
 
 const slider = document.getElementById('layer-slider');
 const stimulusButtons = [...document.querySelectorAll('[data-stimulus]')];
@@ -102,5 +110,10 @@ copyButton.addEventListener('click', async () => {
     status.textContent = 'Citation selected. Press Ctrl+C or ⌘C to copy.';
   }
 });
-const video = document.getElementById('method-video');
-document.addEventListener('visibilitychange', () => {if(document.hidden) video.pause();});
+
+const navToggle = document.querySelector('.nav-toggle');
+const navigation = document.getElementById('core-navigation');
+function closeMenu() { navToggle.setAttribute('aria-expanded','false'); navigation.classList.remove('open'); }
+navToggle.addEventListener('click', () => { const open = navToggle.getAttribute('aria-expanded') !== 'true'; navToggle.setAttribute('aria-expanded',String(open)); navigation.classList.toggle('open',open); });
+navigation.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeMenu));
+document.addEventListener('keydown',event=>{if(event.key==='Escape' && navigation.classList.contains('open')){closeMenu();navToggle.focus();}});

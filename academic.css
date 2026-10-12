@@ -1,0 +1,43 @@
+/* Shared visual language of the Procedural Pretraining project page. */
+@font-face{font-family:Inter;src:url('assets/inter-latin.woff2') format('woff2');font-weight:100 900;font-display:swap}
+@font-face{font-family:'Source Serif 4';src:url('assets/source-serif-400.ttf') format('truetype');font-weight:400;font-display:swap}@font-face{font-family:'Source Serif 4';src:url('assets/source-serif-600.ttf') format('truetype');font-weight:600;font-display:swap}@font-face{font-family:'Source Serif 4';src:url('assets/source-serif-700.ttf') format('truetype');font-weight:700;font-display:swap}
+:root{--sans:Inter,Arial,sans-serif;--serif:'Source Serif 4',Georgia,serif}
+h1,h2{font-family:var(--serif)}
+.institution-row{display:flex;align-items:center;justify-content:center;gap:36px;flex-wrap:wrap;margin:27px auto 35px}
+.institution-row img{width:auto;height:39px;max-width:220px;object-fit:contain}
+.institution-row .adelaide{height:45px;max-width:255px}
+.paper-overview{margin:34px 0;background:#fff;border:1px solid #e0e4ec;border-radius:10px;padding:25px}
+.paper-overview img{display:block;width:100%;height:auto}
+.paper-overview figcaption{font:12px/1.7 var(--sans);color:#596170;margin-top:20px}
+.paper-overview a,.abstract-copy a{color:#285ab5;text-decoration:underline;text-underline-offset:3px}
+.abstract-copy{max-width:850px;margin:0 auto 38px;font-size:16px;line-height:1.85;color:#515969}
+.abstract-copy h2{font-size:32px;color:#202232;letter-spacing:-.025em;margin-bottom:18px}
+.abstract-copy p+p{margin-top:15px}
+@media(max-width:600px){.institution-row{gap:22px;display:grid;grid-template-columns:1fr 1fr;justify-items:center}.institution-row img,.institution-row .adelaide{max-width:145px;height:34px}.paper-overview{padding:14px;margin:27px 0}.abstract-copy{font-size:15px}.paper-overview figcaption{font-size:11px}}
+
+.container{width:min(1080px,calc(100% - 64px))}.header{height:65px;max-width:1200px;position:sticky;top:0;background:#fffffff5;backdrop-filter:blur(12px);z-index:10}.wordmark{font-size:16px}.hero{padding-top:66px}.hero>.eyebrow{justify-content:center;font-size:10px}.hero h1{font-size:clamp(43px,6vw,72px);font-weight:650;letter-spacing:-.035em;text-align:center;margin:23px 0 8px}.paper-subtitle{text-align:center;font:400 clamp(22px,3vw,34px)/1.3 var(--serif);color:#515969}.hero .authors{padding:27px 0 0;font-size:13px}.hero-copy{display:block;text-align:center;max-width:760px;margin:auto}.hero-copy h2{display:none}.hero-copy p{max-width:690px;margin:auto;font-size:18px;padding:0}.hero-actions{justify-content:center}.section-heading h2{font-size:42px;letter-spacing:-.035em}.metrics strong{font-family:var(--serif);font-size:42px}.metrics{margin-top:40px}.section{padding-top:76px}.primary{color:white}.primary:hover{color:white;background:#193e80}.section-heading h2 span{color:#285ab5}.hx-choice input:checked+span{color:white}.hx-core-block{color:#43536b}.hx-middle{color:#285ab5}.citation pre{white-space:pre-wrap;overflow-wrap:anywhere}.paper-card{gap:55px}.hx-explorer{box-shadow:0 8px 32px #263b6510}.tag{border-color:#d5deeb;background:#f4f7fc}.hx-next:hover{color:#193e80}.hx-choice label:hover>input:checked+span{color:white}
+@media(max-width:600px){.container{width:calc(100% - 36px)}.hero{padding-top:34px}.hero-copy p{font-size:16px}.header{padding:0 18px}.hero .authors p{line-height:1.9}.hero .authors p>span{margin:0 4px}.section-heading h2{font-size:34px}.paper-card{gap:30px}.metrics strong{font-size:33px}.hx-panel-foot{font-size:10px}.hx-motion{font-size:10px}.paper-subtitle br{display:none}}
+
+.stimulus-options button[aria-pressed=true]{color:#193e80;background:#e5edfc;border-color:#8ca9d9}.stimulus-options button:hover{color:#193e80}.hx-middle{background:#eaf1fc}.skip-link{color:white}.hx-caption,.hx-overline{font-size:10px}
+
+.authors p{display:flex;flex-wrap:wrap;justify-content:center;gap:5px 16px}.authors p>.author{white-space:nowrap;color:#353b49;margin:0}.nav-toggle{display:none}
+@media(max-width:600px){.nav-toggle{display:block;background:white;border:1px solid #dce2eb;border-radius:5px;padding:8px 12px;font-size:13px}.header nav{display:none;position:absolute;top:65px;left:0;right:0;background:white;box-shadow:0 8px 15px #203b6910;padding:15px 20px}.header nav.open{display:flex;flex-wrap:wrap;gap:15px 22px}.header nav.open a{display:block}.header nav .nav-paper{border:0;padding:0}.hero .authors p>.author{margin:0}.hero .authors p{gap:5px 12px}}
+
+@media(max-width:600px){#imagenet-chart{min-width:0}.chart-wrap{overflow:visible}}
+
+/* Reference: procedural-pretraining-page/static/css/style.css.
+   Preserve its 960px column, serif title, centered logos and full-width gradient. */
+.hero.container{max-width:960px;width:calc(100% - 48px);padding:80px 0;position:relative;isolation:isolate}
+.hero::before{content:"";position:absolute;z-index:-1;top:0;bottom:0;left:calc((100% - 100vw)/2);width:100vw;background:linear-gradient(180deg,var(--hero-top),var(--hero-bottom));pointer-events:none}
+.hero h1{font-family:'Source Serif 4',Georgia,serif;font-size:3.2rem;font-weight:700;line-height:1.15;letter-spacing:-.025em;color:var(--hero-title)}
+.hero .institution-row{gap:40px;margin:28px auto}.hero .institution-row img{opacity:.85}
+.hero .institution-row img:hover{opacity:1}
+.hero-summary,.hero-copy p{font-size:1.15rem;line-height:1.6;max-width:680px;margin-left:auto;margin-right:auto}
+@media(max-width:768px){.hero.container{padding-top:48px;padding-bottom:56px}.hero h1{font-size:2.2rem}.hero-summary,.hero-copy p{font-size:1rem}.hero .institution-row{gap:24px}}
+
+:root{--hero-top:#e6f0ff;--hero-bottom:#f4f8ff;--hero-title:#174a96}
+.hero .paper-subtitle{color:#244c7b}.hero>.eyebrow{color:#35557e}.hero .tag{background:#dceaff;border-color:#adcaef;color:#174a96}.hero .hero-copy p{color:#41546e}
+.hero .hx-explorer{background:#fff}.hero .button.secondary{background:#ffffffc9;border-color:#acc7e9;color:#174a96}
+
+/* Clip full-bleed backgrounds at the viewport, as in the reference site. */
+html,body{overflow-x:clip}
